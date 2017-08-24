@@ -16,7 +16,7 @@ delete current
 delete last
 delete #
 save
-install
+download
 replay on          x
 replay off         x
 replay toggle      x
