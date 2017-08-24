@@ -38,3 +38,11 @@ Instructions on how to install HelmPlay
 18) Press Ctrl + V, then, click "OK"
 19) Click "OK", then, click "OK"
 ### Installing this repository
+1) Click "Clone or download"
+2) Click "Download ZIP"
+3) Right click on the download, then, click "Open File Location"
+4) In file explorer, right click on HelmPlay-master.zip, then, click "Extract All"
+7) Choose a file location
+8) Make sure "Show extracted files when complete" is checked, then, click "Extract"
+
+You can now run HelmPlay by double-clicking HelmPlay.py
