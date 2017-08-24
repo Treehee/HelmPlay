@@ -11,10 +11,7 @@ add search         x
 add file
 open folder
 open recent
-delete first
-delete current
-delete last
-delete #
+delete
 save
 download
 replay on          x
