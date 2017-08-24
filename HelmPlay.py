@@ -4,10 +4,10 @@ driver = webdriver.Chrome()
 
 playlist = []
 '''
-play
+play               x
 pause
-add yt
-add search
+add yt             x
+add search         x
 add file
 open folder
 open recent
