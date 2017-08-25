@@ -79,6 +79,7 @@ def player():
                     current = (current+1)%len(playlist)
                 else:
                     current += 1
+                    
         
 def add_yt(video):
     driver2.get("https://www.youtube.com/v/" + video)
@@ -98,21 +99,22 @@ def play_yt(video):
     driver.get("https://www.youtube.com/watch?v=" + video)
     video_ended = False
     sleep(1)
-    while not video_ended or not IO:
+    while not video_ended and IO:
         element = driver.find_element_by_class_name("ytp-progress-bar")
         video_ended = element.get_attribute("aria-valuenow") == element.get_attribute("aria-valuemax")
     sleep(1)
     driver.get("about:blank")
-    return
 
 def play(item):
     global playlist
-    print("now playing " + str(item) + ") " + playlist[item][1])
+    print("now playing " + str(item+1) + ") " + playlist[item][1])
     if playlist[item][0] == "url":
         play_yt(playlist[item][2])
     else:
         pass
-    return
+    if not IO:
+        global current
+        current -= 1
 def __init__():
     global playlist
     global current
