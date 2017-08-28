@@ -120,6 +120,7 @@ def add_yt(video):
         WebDriverWait(driver, 10).until(element_present)
     except TimeoutException:
         print("Internet connection timed out")
+        return
     driver2.switch_to.frame(driver2.find_element_by_xpath('//embed'))
     title = driver2.find_element_by_xpath('//a[@data-sessionlink="feature=player-title"]').text
     global playlist
@@ -133,6 +134,7 @@ def add_search(search):
         WebDriverWait(driver, 10).until(element_present)
     except TimeoutException:
         print("Internet connection timed out")
+        return
     videos = driver2.find_elements_by_css_selector('.yt-lockup.yt-lockup-tile.yt-lockup-video')
     if len(videos) == 0:
         print("Search did not yield any results")
@@ -141,10 +143,17 @@ def add_search(search):
         add_yt(link)
 
 def play_yt(video):
+    global current
     global IO
     driver.get("https://www.youtube.com/watch?v=" + video)
     video_ended = False
-    sleep(1)
+    try:
+        element_present = EC.presence_of_element_located((By.CLASS_NAME, "ytp-progress-bar"))
+        WebDriverWait(driver, 10).until(element_present)
+    except TimeoutException:
+        print("Internet connection timed out")
+        current -= 1
+        return
     while not video_ended and IO:
         element = driver.find_element_by_class_name("ytp-progress-bar")
         video_ended = element.get_attribute("aria-valuenow") == element.get_attribute("aria-valuemax")
