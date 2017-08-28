@@ -25,6 +25,23 @@ playfrom
 #
 quit
 '''
+def  number(value):
+    global playlist
+    if value == "first":
+        return 0
+    elif value == "last":
+        return len(playlist)-1
+    elif value == "current":
+        return current%len(playlist)
+    elif value == "next":
+        return (current+1)%len(playlist)
+    elif value == "previous":
+        return (current-1)%len(playlist)
+    else:
+        try:
+            return int(value) - 1
+        except:
+            return None
 
 def userinput():
     global replay
@@ -53,6 +70,17 @@ def userinput():
         elif userin == "replay toggle":
             replay = not replay
             print("replay is now turned " + replay*"on" + (not replay)*"off")
+        elif userin.startswith("#"):
+            if len(playlist) == 0:
+                print("playlist doesn't contain any songs yet")
+            else:
+                if number(userin[1:]) is None:
+                    print("Invalid number")
+                else:
+                    try:
+                        print("song " + str(number(userin[1:]) + 1) + ") is called " + playlist[number(userin[1:])][1])
+                    except:
+                        print("Song index out of range")
 
 
 def player():
