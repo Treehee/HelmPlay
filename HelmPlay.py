@@ -116,8 +116,8 @@ def player():
 def add_yt(video):
     driver2.get("https://www.youtube.com/v/" + video)
     try:
-        element_present = EC.presence_of_element_located((By.XPATH, '//a[@data-sessionlink="feature=player-title"]'))
-        WebDriverWait(driver, 10).until(element_present)
+        element_present = EC.presence_of_element_located((By.XPATH, '//embed'))
+        WebDriverWait(driver2, 10).until(element_present)
     except TimeoutException:
         print("Internet connection timed out")
         return
@@ -131,7 +131,7 @@ def add_search(search):
     driver2.get("https://www.youtube.com/results?search_query=" + search)
     try:
         element_present = EC.presence_of_element_located((By.CSS_SELECTOR, '.yt-lockup.yt-lockup-tile.yt-lockup-video'))
-        WebDriverWait(driver, 10).until(element_present)
+        WebDriverWait(driver2, 10).until(element_present)
     except TimeoutException:
         print("Internet connection timed out")
         return
