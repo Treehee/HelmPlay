@@ -91,8 +91,12 @@ def add_yt(video):
 
 def add_search(search):
     driver2.get("https://www.youtube.com/results?search_query=" + search)
-    link = driver2.find_elements_by_css_selector('.yt-uix-tile-link.yt-ui-ellipsis.yt-ui-ellipsis-2.yt-uix-sessionlink')[0].get_attribute("href")[32:]
-    add_yt(link)
+    videos = driver2.find_elements_by_css_selector('.yt-lockup.yt-lockup-tile.yt-lockup-video')
+    if len(videos) == 0:
+        print("Search did not yield any results")
+    else:
+        link = videos[0].find_element_by_css_selector('.yt-uix-tile-link.yt-ui-ellipsis.yt-ui-ellipsis-2.yt-uix-sessionlink').get_attribute("href")[32:]
+        add_yt(link)
 
 def play_yt(video):
     global IO
