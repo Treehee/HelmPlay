@@ -1,6 +1,10 @@
 from selenium import webdriver
 from time import sleep
 from threading import Thread
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import TimeoutException
 
 
 '''
@@ -22,8 +26,8 @@ shuffle on
 shuffle toggle
 skip
 playfrom
-#
-quit
+#                  x
+quit               x
 '''
 def  number(value):
     global playlist
@@ -111,6 +115,11 @@ def player():
         
 def add_yt(video):
     driver2.get("https://www.youtube.com/v/" + video)
+    try:
+        element_present = EC.presence_of_element_located((By.XPATH, '//a[@data-sessionlink="feature=player-title"]'))
+        WebDriverWait(driver, 10).until(element_present)
+    except TimeoutException:
+        print("Internet connection timed out")
     driver2.switch_to.frame(driver2.find_element_by_xpath('//embed'))
     title = driver2.find_element_by_xpath('//a[@data-sessionlink="feature=player-title"]').text
     global playlist
@@ -119,6 +128,11 @@ def add_yt(video):
 
 def add_search(search):
     driver2.get("https://www.youtube.com/results?search_query=" + search)
+    try:
+        element_present = EC.presence_of_element_located((By.CSS_SELECTOR, '.yt-lockup.yt-lockup-tile.yt-lockup-video'))
+        WebDriverWait(driver, 10).until(element_present)
+    except TimeoutException:
+        print("Internet connection timed out")
     videos = driver2.find_elements_by_css_selector('.yt-lockup.yt-lockup-tile.yt-lockup-video')
     if len(videos) == 0:
         print("Search did not yield any results")
