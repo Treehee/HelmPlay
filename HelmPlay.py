@@ -85,6 +85,14 @@ def userinput():
                         print("song " + str(number(userin[1:]) + 1) + ") is called " + playlist[number(userin[1:])][1])
                     except:
                         print("Song index out of range")
+        elif userin.startswith("playfrom #"):
+            if number(userin[10:]) == None:
+                print("Invalid number")
+            else:
+                IO = False
+                sleep(2)
+                current = number(userin[10:])%len(playlist)
+                IO = True
 
 
 def player():
